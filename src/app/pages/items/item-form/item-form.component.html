@@ -1,0 +1,79 @@
+<nav class="mb-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"> <a routerLink="/">Home</a> </li>
+    <li class="breadcrumb-item"> <a routerLink="/items">Itens</a> </li>
+    <li class="breadcrumb-item active">{{pageTitle}}</li>
+  </ol>
+</nav>
+
+
+  <div class="row mb-4">
+    <div class="col-md">
+      <h1 class="h2 border-left pl-2">
+        {{pageTitle}}
+      </h1>
+  </div>
+
+  <div class="col-md">
+    <a routerLink="/items" class="btn btn-sucess float-right">
+      << Voltar
+    </a>
+  </div>
+</div>
+
+
+<form [formGroup]="itemForm" (submit)="submitForm()">
+
+  <div class="card">
+    <div class="card-header">
+      Informações sobre o Item.
+    </div>
+
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="name">Nome</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+          <div class="text-danger" *ngIf="itemForm.get('name').invalid && itemForm.get('name').touched">
+            <div *ngIf="itemForm.get('name').errors.required">Dado Obrigatório</div>
+            <div *ngIf="itemForm.get('name').errors.minlength">Dado Obrigatório</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="description">Descrição</label>
+          <input type="text" class="form-control" id="description" formControlName="description">
+          <div class="text-danger" *ngIf="itemForm.get('description').invalid && itemForm.get('description').touched">
+            <div *ngIf="itemForm.get('description').errors.required">Dado Obrigatório</div>
+            <div *ngIf="itemForm.get('description').errors.minlength">Dado Obrigatório</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="description">Quantidade</label>
+          <input type="number" class="form-control" id="quantity" formControlName="quantity">
+
+          <div class="text-danger" *ngIf="itemForm.get('quantity').invalid && itemForm.get('quantity').touched">
+            <div *ngIf="itemForm.get('quantity').errors.required">Dado Obrigatório</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="alet alert-danger mt-4" *ngIf="serverErrorMessagens">
+    <strong>Erro no servidor:</strong>
+    <ul>
+      <li *ngFor="let error of serverErrorMessages">
+        {{error}}
+      </li>
+    </ul>
+  </div>
+
+  <button [disabled]="subittingForm || itemForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">Salvar</button>
+
+
+
+</form>

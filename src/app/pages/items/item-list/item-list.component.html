@@ -1,0 +1,49 @@
+<nav class="mb-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"> <a routerLink="/">Home</a> </li>
+
+    <li class="breadcrumb-item active">Itens</li>
+  </ol>
+</nav>
+
+
+  <div class="row mb-4">
+    <div class="col-md">
+      <h1 class="h2 border-left pl-2">
+        Itens
+      </h1>
+  </div>
+
+  <div class="col-md">
+    <a routerLink="new" class="btn btn-sucess float-right">
+      + Nova Item
+    </a>
+  </div>
+</div>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr class="bg-primary text-light">
+      <th>Item</th>
+      <th>Quantidade</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>
+        <strong>{{item._id}}</strong><br>
+      <strong>{{item.name}}</strong><br>
+      <small>{{item.description}}</small>
+      </td>
+      <td>
+        <strong>{{item.quantity}}</strong>
+      </td>
+      <td>
+        <a [routerLink]="[item._id, 'edit']" class="btn btn-outline-info btn-sm">Editar</a>
+        <a (click)="deleteItem(item)" class="btn btn-outline-danger btn-sm">Excluir</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
